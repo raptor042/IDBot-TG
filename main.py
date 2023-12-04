@@ -14,7 +14,7 @@ from telegram.ext import (
 
 import logging
 
-from apis.index import create_did_IDBot
+from __web3__.index import create_did_IDBot
 
 logging.basicConfig(format="%(asctime)s -%(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logging.getLogger("httpx").setLevel(logging.WARNING)

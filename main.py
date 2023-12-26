@@ -420,11 +420,11 @@ async def projects(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if(len(projects) > 0):
                 reply_msg = f"<i>🔰 The profile has '<b>{len(projects)}</b>' project(s) 🚀.</i>\n\n"
 
-                reply_msg += f"<b>🎖 Name : </b><i>{projects["projects"][0]}</i>\n<b>📝 Description : </b><i>{projects["projects"][1]}</i>\n<b>📍 Contract Address : </b><i>{projects["projects"][2]}</i>\n<b>🛡 Blockchain : </b><i>{projects["projects"][3]}</i>\n<b>📌 Linktree : </b><i>{projects["projects"][4]}</i>\n<b>📉 HoneyPot : </b><i>{projects["projects"][5]}</i>\n<b>📈 Rugged : </b><i>{projects["projects"][6]}</i>\n<b>🏅 Reputation Score : </b><i>{projects["projects"][7]}</i>\n\n"
+                reply_msg += f"<b>🎖 Name : </b><i>{projects['projects'][0]}</i>\n<b>📝 Description : </b><i>{projects['projects'][1]}</i>\n<b>📍 Contract Address : </b><i>{projects['projects'][2]}</i>\n<b>🛡 Blockchain : </b><i>{projects['projects'][3]}</i>\n<b>📌 Linktree : </b><i>{projects['projects'][4]}</i>\n<b>📉 HoneyPot : </b><i>{projects['projects'][5]}</i>\n<b>📈 Rugged : </b><i>{projects['projects'][6]}</i>\n<b>🏅 Reputation Score : </b><i>{projects['projects'][7]}</i>\n\n"
 
                 await update.message.reply_html(text=reply_msg)
             else:
-                reply_msg = f"<i>🔰 The profile has '<b>{len(projects["projects"])}</b>' project(s).</i>"
+                reply_msg = f"<i>🔰 The profile has '<b>{len(projects)}</b>' project(s).</i>"
                 await update.message.reply_html(text=reply_msg)
         else:
             projects = getProjects(context.user_data["profile"])
@@ -432,11 +432,11 @@ async def projects(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if(len(projects) > 0):
                 reply_msg = f"<i>🔰 Your profile has '<b>{len(projects)}</b>' project(s) 🚀.</i>\n\n"
 
-                reply_msg += f"<b>🎖 Name : </b><i>{projects["projects"][0]}</i>\n<b>📝 Description : </b><i>{projects["projects"][1]}</i>\n<b>📍 Contract Address : </b><i>{projects["projects"][2]}</i>\n<b>🛡 Blockchain : </b><i>{projects["projects"][3]}</i>\n<b>📌 Linktree : </b><i>{projects["projects"][4]}</i>\n<b>📉 HoneyPot : </b><i>{projects["projects"][5]}</i>\n<b>📈 Rugged : </b><i>{projects["projects"][6]}</i>\n<b>🏅 Reputation Score : </b><i>{projects["projects"][7]}</i>\n\n"
+                reply_msg += f"<b>🎖 Name : </b><i>{projects['projects'][0]}</i>\n<b>📝 Description : </b><i>{projects['projects'][1]}</i>\n<b>📍 Contract Address : </b><i>{projects['projects'][2]}</i>\n<b>🛡 Blockchain : </b><i>{projects['projects'][3]}</i>\n<b>📌 Linktree : </b><i>{projects['projects'][4]}</i>\n<b>📉 HoneyPot : </b><i>{projects['projects'][5]}</i>\n<b>📈 Rugged : </b><i>{projects['projects'][6]}</i>\n<b>🏅 Reputation Score : </b><i>{projects['projects'][7]}</i>\n\n"
 
                 await update.message.reply_html(text=reply_msg)
             else:
-                reply_msg = f"<i>🔰 Your profile has '<b>{len(projects["projects"])}</b>' project(s).</i>"
+                reply_msg = f"<i>🔰 Your profile has '<b>{len(projects)}</b>' project(s).</i>"
                 await update.message.reply_html(text=reply_msg)
     except Exception as e:
         print(e)

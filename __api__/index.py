@@ -2,18 +2,18 @@ import logging
 
 import requests
 
-def getProfileAddressI(address):
+def getUser(number):
     try:
-        response = requests.get(f"https://idbot-80bt.onrender.com/profileI/{address}")
+        response = requests.get(f"https://idbot-80bt.onrender.com/user/{number}")
     except:
         logging.error("Unable to send request to the API Gateway.")
     else:
         print(response.text)
         return response.text
-    
-def getProfileAddressII(idbot_number):
+
+def getIDBotNumber(address):
     try:
-        response = requests.get(f"https://idbot-80bt.onrender.com/profileII/{idbot_number}")
+        response = requests.get(f"https://idbot-80bt.onrender.com/number/{address}")
     except:
         logging.error("Unable to send request to the API Gateway.")
     else:

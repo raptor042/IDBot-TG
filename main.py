@@ -12,7 +12,7 @@ from telegram.ext import (
     filters
 )
 
-from __api__.index import getProfileAddressI, getProfileAddressII, getName, getDescription, getEmail, getAge, getCountry, getState, getPhone, getAddress, getScore, getProfilePic, getProjects
+from __api__.index import getUser, getIDBotNumber, getName, getDescription, getEmail, getAge, getCountry, getState, getPhone, getAddress, getScore, getProfilePic, getProjects
 
 import logging
 
@@ -97,12 +97,14 @@ async def connectWallet(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
     user = update.message.from_user
     logger.info(f"{user.username} connected wallet address.")
 
-    context.user_data["address"] = update.message.text.strip()
     print(update.message.text.strip())
 
-    profile = getProfileAddressI(update.message.text.strip())
-    context.user_data["profile"] = profile
-    print(context.user_data["profile"])
+    idbot_number = getIDBotNumber(update.message.text.strip())
+    print(idbot_number)
+
+    context.user_data["profile"] = update.message.text.strip()
+    context.user_data["id"] = idbot_number
+    print(context.user_data["profile"], context.user_data["id"])
 
     keyboard = [
         [InlineKeyboardButton("End Conversation 👋", callback_data="end")]
@@ -118,11 +120,14 @@ async def connectID(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.message.from_user
     logger.info(f"{user.username} connected wallet address.")
 
-    context.user_data["id"] = update.message.text.strip()
     print(update.message.text.strip())
 
-    profile = getProfileAddressII(update.message.text.strip())
+    profile = getUser(update.message.text.strip())
+    print(profile)
+
+    context.user_data["id"] = update.message.text.strip()
     context.user_data["profile"] = profile
+    print(context.user_data["id"], context.user_data["profile"])
 
     keyboard = [
         [InlineKeyboardButton("End Conversation 👋", callback_data="end")]
@@ -417,26 +422,27 @@ async def projects(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if len(args) == 1:
             projects = getProjects(args[0])
 
-            if(len(projects) > 0):
-                reply_msg = f"<i>🔰 The profile has '<b>{len(projects)}</b>' project(s) 🚀.</i>\n\n"
+            if(len(projects["projects"]) > 0):
+                reply_msg = f"<i>🔰 The profile has '<b>{len(projects["projects"])}</b>' project(s) 🚀.</i>\n\n"
 
-                reply_msg += f"<b>🎖 Name : </b><i>{projects['projects'][0]}</i>\n<b>📝 Description : </b><i>{projects['projects'][1]}</i>\n<b>📍 Contract Address : </b><i>{projects['projects'][2]}</i>\n<b>🛡 Blockchain : </b><i>{projects['projects'][3]}</i>\n<b>📌 Linktree : </b><i>{projects['projects'][4]}</i>\n<b>📉 HoneyPot : </b><i>{projects['projects'][5]}</i>\n<b>📈 Rugged : </b><i>{projects['projects'][6]}</i>\n<b>🏅 Reputation Score : </b><i>{projects['projects'][7]}</i>\n\n"
+                for project in projects["projects"]:
+                    reply_msg += f"<b>🎖 Name : </b><i>{project[0]}</i>\n<b>📝 Description : </b><i>{project[1]}</i>\n<b>📍 Contract Address : </b><i>{project[2]}</i>\n<b>🛡 Blockchain : </b><i>{project[3]}</i>\n<b>📌 Linktree : </b><i>{project[4]}</i>\n<b>📉 HoneyPot : </b><i>{project[5]}</i>\n<b>📈 Rugged : </b><i>{project[6]}</i>\n<b>🏅 Reputation Score : </b><i>{project[7]}</i>\n\n"
 
-                await update.message.reply_html(text=reply_msg)
+                    await update.message.reply_html(text=reply_msg)
             else:
-                reply_msg = f"<i>🔰 The profile has '<b>{len(projects)}</b>' project(s).</i>"
+                reply_msg = f"<i>🔰 The profile has '<b>{len(projects["projects"])}</b>' project(s).</i>"
                 await update.message.reply_html(text=reply_msg)
         else:
             projects = getProjects(context.user_data["profile"])
 
-            if(len(projects) > 0):
-                reply_msg = f"<i>🔰 Your profile has '<b>{len(projects)}</b>' project(s) 🚀.</i>\n\n"
+            if(len(projects["projects"]) > 0):
+                reply_msg = f"<i>🔰 Your profile has '<b>{len(projects["projects"])}</b>' project(s) 🚀.</i>\n\n"
 
-                reply_msg += f"<b>🎖 Name : </b><i>{projects['projects'][0]}</i>\n<b>📝 Description : </b><i>{projects['projects'][1]}</i>\n<b>📍 Contract Address : </b><i>{projects['projects'][2]}</i>\n<b>🛡 Blockchain : </b><i>{projects['projects'][3]}</i>\n<b>📌 Linktree : </b><i>{projects['projects'][4]}</i>\n<b>📉 HoneyPot : </b><i>{projects['projects'][5]}</i>\n<b>📈 Rugged : </b><i>{projects['projects'][6]}</i>\n<b>🏅 Reputation Score : </b><i>{projects['projects'][7]}</i>\n\n"
+                reply_msg += f"<b>🎖 Name : </b><i>{project[0]}</i>\n<b>📝 Description : </b><i>{project[1]}</i>\n<b>📍 Contract Address : </b><i>{project[2]}</i>\n<b>🛡 Blockchain : </b><i>{project[3]}</i>\n<b>📌 Linktree : </b><i>{project[4]}</i>\n<b>📉 HoneyPot : </b><i>{project[5]}</i>\n<b>📈 Rugged : </b><i>{project[6]}</i>\n<b>🏅 Reputation Score : </b><i>{project[7]}</i>\n\n"
 
                 await update.message.reply_html(text=reply_msg)
             else:
-                reply_msg = f"<i>🔰 Your profile has '<b>{len(projects)}</b>' project(s).</i>"
+                reply_msg = f"<i>🔰 Your profile has '<b>{len(projects["projects"])}</b>' project(s).</i>"
                 await update.message.reply_html(text=reply_msg)
     except Exception as e:
         print(e)

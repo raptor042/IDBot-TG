@@ -423,26 +423,26 @@ async def projects(update: Update, context: ContextTypes.DEFAULT_TYPE):
             projects = getProjects(args[0])
 
             if(len(projects["projects"]) > 0):
-                reply_msg = f"<i>🔰 The profile has '<b>{len(projects["projects"])}</b>' project(s) 🚀.</i>\n\n"
+                reply_msg = f"<i>🔰 The profile has '<b>{len(projects['projects'])}</b>' project(s) 🚀.</i>\n\n"
 
                 for project in projects["projects"]:
                     reply_msg += f"<b>🎖 Name : </b><i>{project[0]}</i>\n<b>📝 Description : </b><i>{project[1]}</i>\n<b>📍 Contract Address : </b><i>{project[2]}</i>\n<b>🛡 Blockchain : </b><i>{project[3]}</i>\n<b>📌 Linktree : </b><i>{project[4]}</i>\n<b>📉 HoneyPot : </b><i>{project[5]}</i>\n<b>📈 Rugged : </b><i>{project[6]}</i>\n<b>🏅 Reputation Score : </b><i>{project[7]}</i>\n\n"
 
                     await update.message.reply_html(text=reply_msg)
             else:
-                reply_msg = f"<i>🔰 The profile has '<b>{len(projects["projects"])}</b>' project(s).</i>"
+                reply_msg = f"<i>🔰 The profile has '<b>{len(projects['projects'])}</b>' project(s).</i>"
                 await update.message.reply_html(text=reply_msg)
         else:
             projects = getProjects(context.user_data["profile"])
 
             if(len(projects["projects"]) > 0):
-                reply_msg = f"<i>🔰 Your profile has '<b>{len(projects["projects"])}</b>' project(s) 🚀.</i>\n\n"
+                reply_msg = f"<i>🔰 Your profile has '<b>{len(projects['projects'])}</b>' project(s) 🚀.</i>\n\n"
 
                 reply_msg += f"<b>🎖 Name : </b><i>{project[0]}</i>\n<b>📝 Description : </b><i>{project[1]}</i>\n<b>📍 Contract Address : </b><i>{project[2]}</i>\n<b>🛡 Blockchain : </b><i>{project[3]}</i>\n<b>📌 Linktree : </b><i>{project[4]}</i>\n<b>📉 HoneyPot : </b><i>{project[5]}</i>\n<b>📈 Rugged : </b><i>{project[6]}</i>\n<b>🏅 Reputation Score : </b><i>{project[7]}</i>\n\n"
 
                 await update.message.reply_html(text=reply_msg)
             else:
-                reply_msg = f"<i>🔰 Your profile has '<b>{len(projects["projects"])}</b>' project(s).</i>"
+                reply_msg = f"<i>🔰 Your profile has '<b>{len(projects['projects'])}</b>' project(s).</i>"
                 await update.message.reply_html(text=reply_msg)
     except Exception as e:
         print(e)

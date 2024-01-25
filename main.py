@@ -61,7 +61,7 @@ async def connect(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         [InlineKeyboardButton("Connect via IDBot Number 🤖", callback_data="connect-id")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    reply_msg = f"<b>🔰 You can conect your IDBot account in two ways:</b>\n\n<i>✅ Via your Wallet Address</i>\n<i>✅ Via your IDBot Number</i>\n\n<b>🚨 Make your the address or number you enter is correct and the same you used when creating your IDBot account.</b>"
+    reply_msg = f"<b>🔰 You can conect your IDBot account in two ways:</b>\n\n<i>✅ Via your Wallet Address</i>\n<i>✅ Via your IDBot Number</i>\n\n<b>🚨 Make sure your the address or number you enter is correct and the same you used when creating your IDBot account.</b>"
 
     await query.message.reply_html(text=reply_msg, reply_markup=reply_markup)
 
@@ -74,7 +74,7 @@ async def connect_wallet(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     username = context.user_data["username"]
     logger.info(f"{username} is connecting wallet address.")
 
-    reply_msg = f"<b>🔰 Enter your wallet address?</b>\n\n<i>🚨 Make your the address or number you enter is correct and the same you used when creating your IDBot account.</i>"
+    reply_msg = f"<b>🔰 Enter your wallet address?</b>\n\n<i>🚨 Make sure your the address or number you enter is correct and the same you used when creating your IDBot account.</i>"
 
     await query.message.reply_html(text=reply_msg)
 
@@ -87,7 +87,7 @@ async def connect_id(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     username = context.user_data["username"]
     logger.info(f"{username} is connecting IDBot Number")
 
-    reply_msg = f"<b>🔰 Enter your IDBot number?</b>\n\n<i>🚨 Make your the address or number you enter is correct and the same you used when creating your IDBot account.</i>"
+    reply_msg = f"<b>🔰 Enter your IDBot number?</b>\n\n<i>🚨 Make sure your the address or number you enter is correct and the same you used when creating your IDBot account.</i>"
 
     await query.message.reply_html(text=reply_msg)
 
